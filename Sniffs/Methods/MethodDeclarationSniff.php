@@ -18,21 +18,24 @@ class Vivify_Sniffs_Methods_MethodDeclarationSniff extends PHP_CodeSniffer_Stand
      * Processes the function tokens within the class.
      *
      * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
-     * @param int                  $stackPtr  The position where the token was found.
-     * @param int                  $currScope The current scope opener token.
+     * @param int $stackPtr The position where the token was found.
+     * @param int $currScope The current scope opener token.
      *
      * @return void
      */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
-    {
+    protected function processTokenWithinScope(
+        PHP_CodeSniffer_File $phpcsFile,
+        $stackPtr,
+        $currScope
+    ) {
         $tokens = $phpcsFile->getTokens();
 
-	    $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
+        $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
             // Ignore closures.
             return;
-	}
+        }
         if (
             $methodProperties['scope_specified'] &&
             $methodProperties['scope'] === 'private' &&
@@ -41,7 +44,7 @@ class Vivify_Sniffs_Methods_MethodDeclarationSniff extends PHP_CodeSniffer_Stand
             $methodName[1] !== '_'
         ) {
             $error = 'Method name "%s" should be prefixed with an underscore to indicate private visibility';
-            $data  = array($methodName);
+            $data = array($methodName);
             $phpcsFile->addWarning($error, $stackPtr, 'Underscore', $data);
         }
     }
