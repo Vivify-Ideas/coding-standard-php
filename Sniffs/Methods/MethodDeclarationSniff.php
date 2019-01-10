@@ -1,11 +1,10 @@
 <?php
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractScopeSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractScopeSniff not found');
-}
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
+use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Files\File;
 
-class Vivify_Sniffs_Methods_MethodDeclarationSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
-{
+class Vivify_Sniffs_Methods_MethodDeclarationSniff extends AbstractScopeSniff {
 
     public function __construct()
     {
@@ -24,7 +23,7 @@ class Vivify_Sniffs_Methods_MethodDeclarationSniff extends PHP_CodeSniffer_Stand
      * @return void
      */
     protected function processTokenWithinScope(
-        PHP_CodeSniffer_File $phpcsFile,
+        File $phpcsFile,
         $stackPtr,
         $currScope
     ) {
@@ -48,5 +47,9 @@ class Vivify_Sniffs_Methods_MethodDeclarationSniff extends PHP_CodeSniffer_Stand
             $phpcsFile->addWarning($error, $stackPtr, 'Underscore', $data);
         }
     }
+
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    {
+    }//end processTokenOutsideScope()
 
 }//end class
