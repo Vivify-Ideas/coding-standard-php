@@ -11,7 +11,11 @@
  <rule ref="PSR2"/>
  <rule ref="Vivify.Methods.MethodDeclaration"/>
  <rule ref="Vivify.Classes.ClassDeclaration.OpenBraceNewLine"/>
+ <rule ref="Vivify.Classes.PropertyDeclaration.Underscore"/>
  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+     <severity>0</severity>
+ </rule>
+ <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
      <severity>0</severity>
  </rule>
  <rule ref="PSR2.Classes.ClassDeclaration.OpenBraceNewLine">
